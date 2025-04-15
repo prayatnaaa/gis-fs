@@ -2,10 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\PlaceController;
 
-Route::get('/', function () {
-    return Inertia::render('welcome');
-})->name('home');
+Route::resource('/', PlaceController::class);
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
