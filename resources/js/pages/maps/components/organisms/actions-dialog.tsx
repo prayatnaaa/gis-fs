@@ -7,14 +7,10 @@ import { router } from '@inertiajs/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { AddLocationProps } from '../../types/add-location-props';
 import { addPlaceSchema, TAddPlaceSchema } from '../../types/schemas';
 
-type LatLngProps = {
-    lat: number;
-    lang: number;
-};
-
-export function ActionsDialog({ lat, lang }: LatLngProps) {
+export function CreatePlaceDialog({ location, onSuccess }: AddLocationProps) {
     const [open, setOpen] = React.useState<boolean>(false);
     const {
         register,
@@ -28,8 +24,8 @@ export function ActionsDialog({ lat, lang }: LatLngProps) {
         const payload = {
             name: data.name,
             description: data.description,
-            latitude: lat,
-            longitude: lang,
+            latitude: location.lat,
+            longitude: location.lng,
         };
         router.post('/', payload, {
             onError: (errors) => {
@@ -38,6 +34,7 @@ export function ActionsDialog({ lat, lang }: LatLngProps) {
             onSuccess: () => {
                 toast.success('Place created successfully!');
                 setOpen(false);
+                onSuccess();
             },
         });
     };
@@ -67,7 +64,7 @@ export function ActionsDialog({ lat, lang }: LatLngProps) {
                         <Input {...register('description')} onChange={() => console.log('click')} id="description" className="col-span-3" />
                     </div>
                     {errors.description && <p className="flex flex-row-reverse text-xs text-red-500">{errors.description.message}</p>}
-                    <h1 className="flex flex-row-reverse text-xs text-gray-600">{`${lat.toFixed(6)}, ${lang.toFixed(6)}`}</h1>
+                    <h1 className="flex flex-row-reverse text-xs text-gray-600">{`${location.lat.toFixed(6)}, ${location.lng.toFixed(6)}`}</h1>
                     <DialogFooter className="pt-2">
                         <Button disabled={isSubmitting} type="submit" className="hover:cursor-pointer hover:bg-gray-800">
                             Create
