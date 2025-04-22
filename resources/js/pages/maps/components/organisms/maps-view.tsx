@@ -5,6 +5,7 @@ import { PlacesProps } from '../../types/place-props';
 import { ClickableMap } from '../atoms/clickable-maps';
 import { customMarker } from '../atoms/custom-marker';
 import LocationPopup from '../molecules/place-popup';
+import { PlaceActionDialog } from './actions-dialog';
 
 const MapsView = ({ places }: { places: PlacesProps[] | undefined }) => {
     const [modalOpen, setModalOpen] = useState(false);
@@ -35,9 +36,14 @@ const MapsView = ({ places }: { places: PlacesProps[] | undefined }) => {
                         <Marker key={index} position={[place.latitude, place.longitude]} icon={customMarker}>
                             {
                                 <Popup>
-                                    <div className="w-full p-4 text-center">
+                                    <div className="w-full text-center">
                                         <h3 className="text-lg font-bold text-blue-600">{place.name}</h3>
                                         <p className="text-sm text-gray-600">{place.description}</p>
+                                        <PlaceActionDialog
+                                            location={{ lat: +place.latitude, lng: +place.longitude }}
+                                            onSuccess={handleClose}
+                                            place={place}
+                                        />
                                     </div>
                                 </Popup>
                             }

@@ -5,10 +5,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\PlaceController;
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
-    Route::resource('/', PlaceController::class);
+    Route::resource('places', PlaceController::class);
 });
 
 require __DIR__.'/settings.php';

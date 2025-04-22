@@ -1,4 +1,5 @@
 export type PlacesProps = {
+    id: number;
     name: string;
     description: string;
     latitude: number;
