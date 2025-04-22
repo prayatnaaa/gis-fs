@@ -53,7 +53,7 @@ const MapsComponent = ({ places }: { places: PlacesProps[] | undefined }) => {
                     );
                 })}
             </MapContainer>
-            <LocationPopup isOpen={modalOpen} onClose={handleClose} location={selectedLocation} />
+            {location && <LocationPopup isOpen={modalOpen} onClose={handleClose} location={selectedLocation!} onSuccess={handleClose} />}
         </div>
     );
 };

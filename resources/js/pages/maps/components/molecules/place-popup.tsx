@@ -1,13 +1,8 @@
 import { Button } from '@/components/ui/button';
-import { ActionsDialog } from '../organisms/actions-dialog';
+import { AddLocationProps } from '../../types/add-location-props';
+import { CreatePlaceDialog } from '../organisms/actions-dialog';
 
-interface LocationPopupProps {
-    isOpen: boolean;
-    onClose: () => void;
-    location: { lat: number; lng: number } | null;
-}
-
-const LocationPopup: React.FC<LocationPopupProps> = ({ isOpen, onClose, location }) => {
+const LocationPopup: React.FC<AddLocationProps> = ({ isOpen, onClose, location, onSuccess }) => {
     if (!isOpen) return null;
 
     return (
@@ -24,7 +19,7 @@ const LocationPopup: React.FC<LocationPopupProps> = ({ isOpen, onClose, location
                 </div>
 
                 <div className="flex flex-row-reverse justify-between gap-2">
-                    <ActionsDialog lat={location?.lat as number} lang={location?.lng as number} />
+                    <CreatePlaceDialog location={location} onSuccess={onSuccess} />
                     <Button className="hover:cursor-pointer" variant="outline" onClick={onClose}>
                         Cancel
                     </Button>
