@@ -43,7 +43,7 @@ class PlaceController extends Controller
 
         Place::create($validated);
 
-        return redirect()->route('index')-> with([
+        return redirect()->route('places.index')-> with([
             'status' => true,
             'message' => 'Place created successfully!',
         ]);

@@ -5,6 +5,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\PlaceController;
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::redirect('/', '/places');
     Route::resource('places', PlaceController::class);
 });
 

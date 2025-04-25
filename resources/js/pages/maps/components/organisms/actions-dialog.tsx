@@ -46,7 +46,7 @@ export function PlaceActionDialog({ location, onSuccess, place }: PlaceActionPro
                 },
             });
         } else {
-            router.post('/', payload, {
+            router.post('/places', payload, {
                 onError: (errors) => {
                     console.error(errors);
                 },
