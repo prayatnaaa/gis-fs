@@ -7,12 +7,12 @@ const LocationPopup: React.FC<PlaceActionProps> = ({ isOpen, onClose, location, 
 
     return (
         <div className="absolute bottom-4 left-1/2 z-50 w-full max-w-md -translate-x-1/2 transform">
-            <div className="flex w-full items-center justify-between rounded-lg bg-white p-6 shadow-lg">
+            <div className="flex w-full items-center justify-between rounded-lg bg-black p-6 shadow-lg">
                 <div className="flex flex-col items-start">
                     <h2 className="text-lg font-semibold">Selected Location</h2>
 
                     {location && (
-                        <p className="text-sm text-gray-700">
+                        <p className="text-sm text-gray-500">
                             {location.lat.toFixed(6)}, {location.lng.toFixed(6)}
                         </p>
                     )}
