@@ -1,17 +1,15 @@
 import { Toaster } from 'react-hot-toast';
-import '../globals.css';
 
 export default function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    console.log('this is layout');
     return (
-        <html lang="en">
-            <body className={`antialiased`}>
-                <Toaster position="bottom-right" />
-                {children}
-            </body>
-        </html>
+        <div className={`min-h-screen antialiased`}>
+            <Toaster position="bottom-right" />
+            {children}
+        </div>
     );
 }

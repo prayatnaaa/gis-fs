@@ -7,42 +7,62 @@ import { router } from '@inertiajs/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { AddLocationProps } from '../../types/add-location-props';
+import { PlaceActionProps } from '../../types/add-location-props';
 import { addPlaceSchema, TAddPlaceSchema } from '../../types/schemas';
 
-export function CreatePlaceDialog({ location, onSuccess }: AddLocationProps) {
+export function PlaceActionDialog({ location, onSuccess, place }: PlaceActionProps) {
     const [open, setOpen] = React.useState<boolean>(false);
     const {
         register,
         handleSubmit,
         formState: { errors, isSubmitting },
     } = useForm<TAddPlaceSchema>({
+        defaultValues: place
+            ? {
+                  name: place.name,
+                  description: place.description,
+              }
+            : undefined,
         resolver: zodResolver(addPlaceSchema),
     });
 
     const onSubmit = async (data: TAddPlaceSchema) => {
+        console.log(place);
         const payload = {
             name: data.name,
             description: data.description,
             latitude: location.lat,
             longitude: location.lng,
         };
-        router.post('/', payload, {
-            onError: (errors) => {
-                console.error(errors);
-            },
-            onSuccess: () => {
-                toast.success('Place created successfully!');
-                setOpen(false);
-                onSuccess();
-            },
-        });
+        if (place) {
+            router.put(`/places/${place.id}`, payload, {
+                onError: (errors) => {
+                    console.error(errors);
+                },
+                onSuccess: () => {
+                    toast.success('Place edited successfully!');
+                    setOpen(false);
+                    onSuccess();
+                },
+            });
+        } else {
+            router.post('/places', payload, {
+                onError: (errors) => {
+                    console.error(errors);
+                },
+                onSuccess: () => {
+                    toast.success('Place created successfully!');
+                    setOpen(false);
+                    onSuccess();
+                },
+            });
+        }
     };
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button variant="outline">Create</Button>
+                <Button variant="outline">{place ? 'Edit' : 'Create'}</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
@@ -67,7 +87,7 @@ export function CreatePlaceDialog({ location, onSuccess }: AddLocationProps) {
                     <h1 className="flex flex-row-reverse text-xs text-gray-600">{`${location.lat.toFixed(6)}, ${location.lng.toFixed(6)}`}</h1>
                     <DialogFooter className="pt-2">
                         <Button disabled={isSubmitting} type="submit" className="hover:cursor-pointer hover:bg-gray-800">
-                            Create
+                            {place ? 'Edit' : 'Create'}
                         </Button>
                     </DialogFooter>
                 </form>

@@ -43,7 +43,7 @@ class PlaceController extends Controller
 
         Place::create($validated);
 
-        return redirect()->route('index')-> with([
+        return redirect()->route('places.index')-> with([
             'status' => true,
             'message' => 'Place created successfully!',
         ]);
@@ -56,6 +56,9 @@ class PlaceController extends Controller
     public function show(Place $place)
     {
         //
+        return Inertia::render('Show', [
+            'place' => $place
+        ]);
     }
 
     /**
@@ -64,6 +67,9 @@ class PlaceController extends Controller
     public function edit(Place $place)
     {
         //
+        return Inertia::render('Edit', [
+            'place' => $place
+        ]);
     }
 
     /**
@@ -72,6 +78,12 @@ class PlaceController extends Controller
     public function update(Request $request, Place $place)
     {
         //
+        $place->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+        ]);
     }
 
     /**
@@ -80,5 +92,6 @@ class PlaceController extends Controller
     public function destroy(Place $place)
     {
         //
+        $place->delete();
     }
 }

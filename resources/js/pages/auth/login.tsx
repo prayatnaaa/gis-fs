@@ -28,8 +28,6 @@ export default function Login({ status, canResetPassword }: LoginProps) {
         remember: false,
     });
 
-    console.log('masuk');
-
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         post(route('login'), {
