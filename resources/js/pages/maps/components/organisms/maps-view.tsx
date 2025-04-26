@@ -1,6 +1,6 @@
 import 'leaflet/dist/leaflet.css';
 import { useState } from 'react';
-import { MapContainer, Marker, Popup, TileLayer, ZoomControl } from 'react-leaflet';
+import { MapContainer, Marker, Polyline, Popup, TileLayer, ZoomControl } from 'react-leaflet';
 import { PlacesProps } from '../../types/place-props';
 import { ClickableMap } from '../atoms/clickable-maps';
 import { customMarker } from '../atoms/custom-marker';
@@ -50,6 +50,12 @@ const MapsView = ({ places }: { places: PlacesProps[] | undefined }) => {
                         </Marker>
                     );
                 })}
+                <Polyline
+                    positions={[
+                        [-2.5489, 118.0149],
+                        [-2.5489, 118.898],
+                    ]}
+                />
             </MapContainer>
             {location && <LocationPopup isOpen={modalOpen} onClose={handleClose} location={selectedLocation!} onSuccess={handleClose} />}
         </div>
