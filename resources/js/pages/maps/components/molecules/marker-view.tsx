@@ -24,7 +24,7 @@ export const MarkerView = ({ places, handleMapClick, handleClose, selectedLocati
                     <Marker key={index} position={[place.latitude, place.longitude]} icon={customMarker}>
                         {
                             <Popup>
-                                <div className="w-full text-center">
+                                <div className="min-w-full text-center">
                                     <h3 className="text-lg font-bold text-blue-600">{place.name}</h3>
                                     <p className="text-sm text-gray-600">{place.description}</p>
                                     <PlaceActionDialog
