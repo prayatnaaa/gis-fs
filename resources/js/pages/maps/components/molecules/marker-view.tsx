@@ -1,6 +1,6 @@
 import { Marker, Popup } from 'react-leaflet';
+import { ClickableMap } from '../../../../components/clickable-maps';
 import { PlacesProps } from '../../types/place-props';
-import { ClickableMap } from '../atoms/clickable-maps';
 import { customMarker } from '../atoms/custom-marker';
 import { PlaceActionDialog } from '../organisms/actions-dialog';
 
