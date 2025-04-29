@@ -15,12 +15,12 @@ import {
 const items = [
     {
         title: 'Home',
-        url: '#',
+        url: '/',
         icon: Home,
     },
     {
         title: 'Polyline',
-        url: '#',
+        url: '/polyline',
         icon: Inbox,
     },
     {
@@ -40,7 +40,7 @@ export function AppSidebar() {
         <Sidebar>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Application</SidebarGroupLabel>
+                    <SidebarGroupLabel className="font-bold">Mappo</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (
