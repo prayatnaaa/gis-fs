@@ -14,11 +14,19 @@ createInertiaApp({
     setup({ el, App, props }) {
         const root = createRoot(el);
 
-        root.render(
-            <RootLayout>
-                <App {...props} />
-            </RootLayout>,
-        );
+        const pageName = props.initialPage.component;
+
+        const noLayoutRoutes = ['auth/login', 'auth/register'];
+
+        if (noLayoutRoutes.includes(pageName)) {
+            root.render(<App {...props} />);
+        } else {
+            root.render(
+                <RootLayout>
+                    <App {...props} />
+                </RootLayout>,
+            );
+        }
     },
     progress: {
         color: '#4B5563',
