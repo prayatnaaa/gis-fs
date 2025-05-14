@@ -20,7 +20,7 @@ const items = [
     },
     {
         title: 'Polyline',
-        url: '/polyline',
+        url: '/polylines',
         icon: Inbox,
     },
     {
