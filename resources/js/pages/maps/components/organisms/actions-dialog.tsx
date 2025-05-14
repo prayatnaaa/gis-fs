@@ -27,7 +27,6 @@ export function PlaceActionDialog({ location, onSuccess, place }: PlaceActionPro
     });
 
     const onSubmit = async (data: TAddPlaceSchema) => {
-        console.log(place);
         const payload = {
             name: data.name,
             description: data.description,
@@ -62,11 +61,13 @@ export function PlaceActionDialog({ location, onSuccess, place }: PlaceActionPro
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button variant="outline">{place ? 'Edit' : 'Create'}</Button>
+                <Button className="text-white hover:cursor-pointer hover:text-gray-200" variant="outline">
+                    {place ? 'Edit' : 'Create'}
+                </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Add Place</DialogTitle>
+                    <DialogTitle>{place ? 'Edit Place' : 'Add Place'}</DialogTitle>
                     <DialogDescription>Make changes to the place information. Click save when you're done.</DialogDescription>
                 </DialogHeader>
                 <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>

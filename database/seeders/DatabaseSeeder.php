@@ -6,6 +6,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Place;
+use App\Models\Polyline;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,7 +23,9 @@ class DatabaseSeeder extends Seeder
             'password' => 'dummy@user.com'
         ]);
 
-        Place::factory(10)->create();
+        Place::factory(4)->create();
+        Polyline::factory(3)->create();
+
 
     }
 }

@@ -1,3 +1,5 @@
+import { AppSidebar } from '@/components/app-sidebar';
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { Toaster } from 'react-hot-toast';
 
 export default function RootLayout({
@@ -5,11 +7,14 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    console.log('this is layout');
     return (
-        <div className={`min-h-screen antialiased`}>
-            <Toaster position="bottom-right" />
-            {children}
-        </div>
+        <SidebarProvider>
+            <AppSidebar />
+            <div className={`min-h-screen min-w-full antialiased`}>
+                <Toaster position="bottom-right" />
+                <SidebarTrigger />
+                {children}
+            </div>
+        </SidebarProvider>
     );
 }
